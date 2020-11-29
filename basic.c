@@ -28,14 +28,14 @@ char *int_to_bytes(int num){
 }
 char *simp_filename(char *filename){
     char *res = (char *)malloc(sizeof(char) * MAX_FILENAME_LEN);
-    memset(res, 0, sizeof(char)* BUFF_SIZE);
+    memset(res, 0, sizeof(char)* MAX_FILENAME_LEN);
     for (int j = 0; j < MAX_FILENAME_LEN && filename[j] != 0x20; j++)
         res[j] = filename[j];
     return res;
 }
 char *simp_ext(char *ext){
     char *res = (char *)malloc(sizeof(char) * MAX_EXT_LEN);
-    memset(res, 0, sizeof(char)* BUFF_SIZE);
+    memset(res, 0, sizeof(char)* MAX_EXT_LEN);
     for (int j = 0; j < MAX_EXT_LEN && ext[j] != 0x20; j++)
         res[j] = ext[j];
     return res;

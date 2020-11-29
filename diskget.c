@@ -63,29 +63,29 @@ void fetch_file_to_cur_dir(FILE *disk_fp, Item item, char *filename){
         // printf("%d ", item.start_cluster);
         sec = read_sector_n(disk_fp, 33 + item.start_cluster - 2);
         // printf("%d ", entry);
-        int n;
+        // int n;
         if (remain_size > SECTOR_SIZE){
-            n = fwrite(sec, 1, SECTOR_SIZE, outfp);
+            fwrite(sec, 1, SECTOR_SIZE, outfp);
             // printf("%d\n", n);
             remain_size -= SECTOR_SIZE;
         }else{
-            n = fwrite(sec, 1, remain_size, outfp);
+            fwrite(sec, 1, remain_size, outfp);
             // printf("%d\n", n);
             remain_size -= remain_size;
         }
         while(0 < entry && entry < (uint32_t)0xFF0){
             sec = read_sector_n(disk_fp, 33 + entry - 2);
             if (remain_size > SECTOR_SIZE){
-                n = fwrite(sec, 1, SECTOR_SIZE, outfp);
-                printf("%d\n", n);
+                fwrite(sec, 1, SECTOR_SIZE, outfp);
+                //  printf("%d\n", n);
                 remain_size -= SECTOR_SIZE;
             }else{
-                n = fwrite(sec, 1, remain_size, outfp);
-                printf("%d\n", n);
+                fwrite(sec, 1, remain_size, outfp);
+                // printf("%d\n", n);
                 remain_size -= remain_size;
             }
             entry = get_fat_entry(disk_fp, entry);
-            printf("entry %d remain %d\n", entry, remain_size);
+            // printf("entry %d remain %d\n", entry, remain_size);
         }
         fclose(outfp);
     }else
